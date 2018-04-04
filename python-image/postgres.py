@@ -17,4 +17,5 @@ def selectAll():
 
 def addNew(personId, personName):
     cur.execute("INSERT INTO Persons VALUES (%s, %s);", (personId, personName))
+    con.commit()
     return selectAll()
