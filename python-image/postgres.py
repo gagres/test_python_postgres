@@ -1,6 +1,14 @@
 import psycopg2 as p
+import os
 
-con = p.connect("dbname='admin' user='admin' password='admin' host='172.17.0.2' port='5432'")
+host = os.environ['SERVER_PORT_5432_TCP_ADDR']
+port = os.environ['SERVER_PORT_5432_TCP_PORT']
+dbname = os.environ['SERVER_ENV_POSTGRES_DB']
+dbuser = os.environ['SERVER_ENV_POSTGRES_USER']
+dbpass = 'admin'
+
+con = p.connect("host='%s' port='%s' dbname='%s' user='%s' password='%s'" % 
+      (host, port, dbname, dbuser, dbpass))
 cur = con.cursor()
 
 def selectAll():
