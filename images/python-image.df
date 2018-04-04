@@ -1,0 +1,13 @@
+FROM python:2.7
+RUN mkdir files
+COPY ["./postgres.py", "/files"]
+COPY ["./excel_read.py", "/files"]
+COPY ["./teste_python.xlsx", "/files"]
+COPY ["./requirements.txt", "/files"]
+WORKDIR "/files"
+RUN python -m virtualenv env
+RUN . env/bin/activate
+RUN pip install -r "requirements.txt"
+VOLUME /files
+ENTRYPOINT ["python"]
+CMD ["excel_read.py"]
